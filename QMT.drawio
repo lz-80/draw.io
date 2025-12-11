@@ -1,0 +1,85 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.7">
+  <diagram name="第 1 页" id="A3u7_5KJ64CxPtisEoR0">
+    <mxGraphModel dx="929" dy="560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="HMn63vNvi8chJqYdg25w-1" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=16;fontStyle=1;align=center;verticalAlign=middle;" value="one_file_cache.py 流程（15分钟定时调度）" vertex="1">
+          <mxGeometry height="50" width="900" x="100" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-2" parent="1" style="whiteSpace=wrap;html=1;fillColor=#cfe2f3;strokeColor=#6fa8dc;" value="启动与配置&#xa;min_path / session_id&#xa;XtQuantTrader.start()" vertex="1">
+          <mxGeometry height="60" width="280" x="800" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-3" parent="1" style="whiteSpace=wrap;html=1;fillColor=#cfe2f3;strokeColor=#6fa8dc;" value="连接 QMT&#xa;trader.connect()" vertex="1">
+          <mxGeometry height="60" width="280" x="800" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-4" parent="1" style="whiteSpace=wrap;html=1;fillColor=#cfe2f3;strokeColor=#6fa8dc;" value="订阅账户&#xa;StockAccount + trader.subscribe()" vertex="1">
+          <mxGeometry height="60" width="280" x="800" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-5" parent="1" style="whiteSpace=wrap;html=1;fillColor=#cfe2f3;strokeColor=#6fa8dc;" value="板块数据&#xa;xtdata.get_client() → down_all_sector_data()&#xa;get_sector_list()" vertex="1">
+          <mxGeometry height="60" width="300" x="800" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-6" parent="1" style="whiteSpace=wrap;html=1;fillColor=#d9ead3;strokeColor=#6aa84f;" value="DataManager&#xa;- download_all_1m&#xa;- load_all_1m&#xa;- parse_all_1m&#xa;- build_15m" vertex="1">
+          <mxGeometry height="60" width="280" x="800" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-7" parent="1" style="whiteSpace=wrap;html=1;fillColor=#ffe599;strokeColor=#f1c232;" value="MAStickinessStrategy&#xa;.generate(symbol, df15) → sig" vertex="1">
+          <mxGeometry height="60" width="280" x="800" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-8" parent="1" style="whiteSpace=wrap;html=1;fillColor=#ffe599;strokeColor=#f1c232;" value="信号处理&#xa;- 打印买/卖&#xa;- 追加到 cycle_signals" vertex="1">
+          <mxGeometry height="60" width="280" x="800" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-9" parent="1" style="whiteSpace=wrap;html=1;fillColor=#ead1dc;strokeColor=#c27ba0;" value="输出与持久化&#xa;signals.json（覆盖，仅本轮信号）" vertex="1">
+          <mxGeometry height="60" width="320" x="800" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-10" parent="1" style="whiteSpace=wrap;html=1;fillColor=#ead1dc;strokeColor=#c27ba0;" value="通知&#xa;- 构造邮件正文&#xa;- 调用 email163 发送" vertex="1">
+          <mxGeometry height="60" width="300" x="800" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-11" parent="1" style="whiteSpace=wrap;html=1;fillColor=#ead1dc;strokeColor=#c27ba0;" value="可选短信&#xa;send_sms / send_sms_batch" vertex="1">
+          <mxGeometry height="60" width="180" x="800" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-12" parent="1" style="whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#bf9000;" value="策略轮结束" vertex="1">
+          <mxGeometry height="60" width="250" x="800" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-13" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f4cccc;strokeColor=#cc0000;" value="主调度循环（每15分钟）&#xa;- 计算预定时间&#xa;- 等待至预定&#xa;- 运行 run_once&#xa;- 休眠至下一次" vertex="1">
+          <mxGeometry height="60" width="300" x="500" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-14" edge="1" parent="1" source="HMn63vNvi8chJqYdg25w-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="HMn63vNvi8chJqYdg25w-3" value="→">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-15" edge="1" parent="1" source="HMn63vNvi8chJqYdg25w-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="HMn63vNvi8chJqYdg25w-4" value="成功">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-16" edge="1" parent="1" source="HMn63vNvi8chJqYdg25w-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="HMn63vNvi8chJqYdg25w-5" value="→">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-17" edge="1" parent="1" source="HMn63vNvi8chJqYdg25w-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="HMn63vNvi8chJqYdg25w-6" value="→">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-18" edge="1" parent="1" source="HMn63vNvi8chJqYdg25w-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="HMn63vNvi8chJqYdg25w-7" value="构造15m → 生成信号">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-19" edge="1" parent="1" source="HMn63vNvi8chJqYdg25w-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="HMn63vNvi8chJqYdg25w-8" value="sig">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-20" edge="1" parent="1" source="HMn63vNvi8chJqYdg25w-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="HMn63vNvi8chJqYdg25w-9" value="有买/卖 → 写入">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-21" edge="1" parent="1" source="HMn63vNvi8chJqYdg25w-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="HMn63vNvi8chJqYdg25w-10" value="→">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-22" edge="1" parent="1" source="HMn63vNvi8chJqYdg25w-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="HMn63vNvi8chJqYdg25w-12" value="→">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-23" edge="1" parent="1" source="HMn63vNvi8chJqYdg25w-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="HMn63vNvi8chJqYdg25w-11" value="可选路径">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-24" edge="1" parent="1" source="HMn63vNvi8chJqYdg25w-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" target="HMn63vNvi8chJqYdg25w-6" value="run_once → DataManager">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HMn63vNvi8chJqYdg25w-25" edge="1" parent="1" source="HMn63vNvi8chJqYdg25w-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="HMn63vNvi8chJqYdg25w-12" value="连接失败 → 结束">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
