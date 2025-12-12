@@ -1,0 +1,139 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.7">
+  <diagram name="第 1 页" id="Y4dm2VaiHclrwX5xFMCj">
+    <mxGraphModel dx="-7341" dy="560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-1" parent="1" style="whiteSpace=wrap;html=1;strokeColor=none;fontSize=18;fontStyle=1;fillColor=#ffffff;" value="WCA_Laser_FilterSpeed — 主流程" vertex="1">
+          <mxGeometry height="40" width="480" x="9000" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-2" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="开始 WCA_Laser_FilterSpeed" vertex="1">
+          <mxGeometry height="50" width="420" x="9000" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-3" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="计算 pidspeed = PidCalc_Laser(walkspeed, psense_sPID)" vertex="1">
+          <mxGeometry height="60" width="420" x="9000" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-4" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="计算 m_WalkSpeed = WCA_Get_Speed_Mul_BodyPosFactor(..., pidspeed, WalkMaxSpeed)" vertex="1">
+          <mxGeometry height="70" width="420" x="9000" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-5" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="lastWalkSpeed = pVaryingParas-&gt;sense_CurWalkSpeed" vertex="1">
+          <mxGeometry height="60" width="420" x="9000" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-6" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="减速过快？ m_WalkSpeed &lt; lastWalkSpeed - DeltaWalkSpeedDown" vertex="1">
+          <mxGeometry height="70" width="420" x="9000" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-7" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="是→ m_WalkSpeed = lastWalkSpeed - DeltaWalkSpeedDown" vertex="1">
+          <mxGeometry height="60" width="420" x="9000" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-8" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="加速过快？ m_WalkSpeed &gt; lastWalkSpeed + DeltaWalkSpeedUp" vertex="1">
+          <mxGeometry height="70" width="420" x="9000" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-9" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="是→ m_WalkSpeed = lastWalkSpeed + DeltaWalkSpeedUp" vertex="1">
+          <mxGeometry height="60" width="420" x="9000" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-10" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="限幅：若 m_WalkSpeed ≤ 0 → 0；若 ≥ WalkMaxSpeed → WalkMaxSpeed" vertex="1">
+          <mxGeometry height="80" width="420" x="9000" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-11" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="更新 sense_CurWalkSpeed = m_WalkSpeed" vertex="1">
+          <mxGeometry height="60" width="420" x="9000" y="770" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-12" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="返回 m_WalkSpeed" vertex="1">
+          <mxGeometry height="60" width="420" x="9000" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-13" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="G2xYuQ2LVNdrytxjOFwj-4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-14" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="G2xYuQ2LVNdrytxjOFwj-5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-15" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="G2xYuQ2LVNdrytxjOFwj-6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-16" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="G2xYuQ2LVNdrytxjOFwj-7" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-17" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="G2xYuQ2LVNdrytxjOFwj-8" value="否">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-18" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="G2xYuQ2LVNdrytxjOFwj-9" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-19" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="G2xYuQ2LVNdrytxjOFwj-10" value="否">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-20" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="G2xYuQ2LVNdrytxjOFwj-10" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-21" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="G2xYuQ2LVNdrytxjOFwj-11" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-22" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="G2xYuQ2LVNdrytxjOFwj-12" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-23" parent="1" style="whiteSpace=wrap;html=1;strokeColor=none;fontSize=18;fontStyle=1;fillColor=#ffffff;" value="WCA_Laser_FilterSpeed — 引用函数" vertex="1">
+          <mxGeometry height="40" width="480" x="9600" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-24" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="开始 PidCalc_Laser" vertex="1">
+          <mxGeometry height="50" width="420" x="9600" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-25" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="error = dstSpeed - preValue；LocSum += error；res = Ki * LocSum" vertex="1">
+          <mxGeometry height="70" width="420" x="9600" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-26" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="更新 preValue = res；返回 res" vertex="1">
+          <mxGeometry height="70" width="420" x="9600" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-27" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="G2xYuQ2LVNdrytxjOFwj-25" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-28" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="开始 WCA_Get_Speed_Mul_BodyPosFactor" vertex="1">
+          <mxGeometry height="50" width="420" x="10050" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-29" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="curFactor = Avg(BodyShift)；factorMax = BASE - curFactor*OFFSET_MAX；avgmotorspeed = Avg(MotorSpeed)" vertex="1">
+          <mxGeometry height="70" width="420" x="10050" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-30" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="avgmotorspeed &lt; maxSpeed 且 bodyFactor &lt; factorMax？" vertex="1">
+          <mxGeometry height="70" width="420" x="10050" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-31" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="是→ bodyFactor += 0.00125" vertex="1">
+          <mxGeometry height="60" width="420" x="10050" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-32" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="否则：bodyFactor &gt; factorMax？" vertex="1">
+          <mxGeometry height="70" width="420" x="10050" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-33" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="是→ bodyFactor -= 0.00125" vertex="1">
+          <mxGeometry height="60" width="420" x="10050" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-34" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="dstSpeed = speed * bodyFactor；输出日志" vertex="1">
+          <mxGeometry height="70" width="420" x="10050" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-35" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="返回 dstSpeed" vertex="1">
+          <mxGeometry height="60" width="420" x="10050" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-36" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="G2xYuQ2LVNdrytxjOFwj-29" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-37" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="G2xYuQ2LVNdrytxjOFwj-30" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-38" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="G2xYuQ2LVNdrytxjOFwj-31" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-39" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="G2xYuQ2LVNdrytxjOFwj-32" value="否">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-40" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="G2xYuQ2LVNdrytxjOFwj-33" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-41" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="G2xYuQ2LVNdrytxjOFwj-34" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-42" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="G2xYuQ2LVNdrytxjOFwj-34" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="G2xYuQ2LVNdrytxjOFwj-43" edge="1" parent="1" source="G2xYuQ2LVNdrytxjOFwj-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="G2xYuQ2LVNdrytxjOFwj-35" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
