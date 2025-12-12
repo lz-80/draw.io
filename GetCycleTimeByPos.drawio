@@ -1,0 +1,253 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.7">
+  <diagram name="第 1 页" id="5jvJzMg8ZPq7o0UKtkwt">
+    <mxGraphModel dx="-4033" dy="560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-1" parent="1" style="whiteSpace=wrap;html=1;strokeColor=none;fontSize=18;fontStyle=1;fillColor=#ffffff;" value="WCA_Laser_GetCycleTimeByPos — 主流程（重绘）" vertex="1">
+          <mxGeometry height="40" width="420" x="5000" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-2" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="开始 GetCycleTimeByPos" vertex="1">
+          <mxGeometry height="50" width="380" x="5000" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-3" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="更新 sense_CurMotorSpeed = CurMotorSpeed" vertex="1">
+          <mxGeometry height="60" width="380" x="5000" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-4" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="计算斜率：WCA_CalculateFootPosSlopePositive(sPos)" vertex="1">
+          <mxGeometry height="60" width="380" x="5000" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-5" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="处于 CONT_WALK？ sense_WalkStatus==CONT_WALK" vertex="1">
+          <mxGeometry height="70" width="380" x="5000" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-6" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="检测拐点？ WCA_Laser_DetectCycleTurnPointBySlope" vertex="1">
+          <mxGeometry height="70" width="380" x="5000" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-7" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="未开始？ sense_CycleStart==false" vertex="1">
+          <mxGeometry height="70" width="380" x="5000" y="470" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-8" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="是→ WCA_StartCycle(&amp;CycleStartTick, sPos, pVaryingParas)" vertex="1">
+          <mxGeometry height="60" width="380" x="5000" y="550" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-9" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="否则：WaitForTime 计时；判定有效步\nCycleLength≥50 &amp;&amp; CycleTime≥250 ？" vertex="1">
+          <mxGeometry height="80" width="380" x="5000" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-10" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="是→ WCA_EndCycle；WCA_StartCycle\n设置 res=true" vertex="1">
+          <mxGeometry height="80" width="380" x="5000" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-11" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="否→ 累加 sense_CycleLength += CurMotorSpeed * WALKCONTROL_TIMEINTERVAL_MS" vertex="1">
+          <mxGeometry height="60" width="380" x="5000" y="800" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-12" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="非拐点路径：CycleStart？" vertex="1">
+          <mxGeometry height="70" width="380" x="5000" y="870" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-13" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="连续零速？ CurMotorSpeed≤0 且 LastMotorSpeed≤0" vertex="1">
+          <mxGeometry height="90" width="380" x="5000" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-14" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="是→ WaitForTime；WCA_EndCycle；WCA_ResetCycle；\nCycleBeginEndCount=0" vertex="1">
+          <mxGeometry height="90" width="380" x="5000" y="1040" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-15" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="否→ 累加长度；调用 WCA_Laser_DetectCycleForwardStartBySlope\n检测向前起点" vertex="1">
+          <mxGeometry height="90" width="380" x="5000" y="1130" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-16" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Else（非 CONT_WALK）：ResetCycle；清空预起步；计数；\n设置 PaceFrontPos=500.0f" vertex="1">
+          <mxGeometry height="70" width="380" x="5000" y="1230" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-17" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="返回 res" vertex="1">
+          <mxGeometry height="60" width="380" x="5000" y="1310" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-18" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="-kGmH0JKR3XMYHJRQ5jy-6" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-19" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.4;exitY=1;" target="-kGmH0JKR3XMYHJRQ5jy-7" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-20" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.6;exitY=1;" target="-kGmH0JKR3XMYHJRQ5jy-9" value="否">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-21" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.4;exitY=1;" target="-kGmH0JKR3XMYHJRQ5jy-10" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-22" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.6;exitY=1;" target="-kGmH0JKR3XMYHJRQ5jy-11" value="否">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-23" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-12" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-24" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-13" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-25" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.4;exitY=1;" target="-kGmH0JKR3XMYHJRQ5jy-14" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-26" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-17" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-27" parent="1" style="whiteSpace=wrap;html=1;strokeColor=none;fontSize=18;fontStyle=1;fillColor=#ffffff;" value="WCA_Laser_GetCycleTimeByPos — 引用函数（重绘）" vertex="1">
+          <mxGeometry height="40" width="420" x="5500" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-28" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="开始 WCA_CalculateFootPosSlopePositive" vertex="1">
+          <mxGeometry height="50" width="360" x="5500" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-29" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="计算 slope = WCA_CalculateSlopeFloat(frontPos, CYCLEUNIT)；加入队列" vertex="1">
+          <mxGeometry height="70" width="360" x="5500" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-30" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="队列长度≥SLOPELENGTH？统计正斜率数量（返回 slope）" vertex="1">
+          <mxGeometry height="70" width="360" x="5500" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-31" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="返回 slope" vertex="1">
+          <mxGeometry height="50" width="360" x="5500" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-32" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-29" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-33" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-30" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-34" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-31" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-35" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="开始 DetectCycleTurnPointBySlope" vertex="1">
+          <mxGeometry height="50" width="360" x="5950" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-36" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="读取 frontslope[i..i-3]；阈值5.0；速度≥0.05？\n全部≥阈值且未处于PrePace → 设置 PrePace=true，计数清零" vertex="1">
+          <mxGeometry height="90" width="360" x="5950" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-37" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="否则若 PrePace=true → 预落地计数自增（限顶999→回1）" vertex="1">
+          <mxGeometry height="70" width="360" x="5950" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-38" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="落地判定：PrePace=true 且速度&gt;0.05 且 frontslope[i]&lt;0\n且 frontslope[i-1]-frontslope[i] ∈(0,100) → 返回 true" vertex="1">
+          <mxGeometry height="90" width="360" x="5950" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-39" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="返回检测结果" vertex="1">
+          <mxGeometry height="50" width="360" x="5950" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-40" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-36" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-41" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="开始 DetectCycleForwardStartBySlope" vertex="1">
+          <mxGeometry height="50" width="360" x="6400" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-42" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="frontslope[i]&gt;0 且 frontslope[i-1]≤0？\n是→取近6个 FrontPos 的“最大值”并过滤异常（≤125mm差）" vertex="1">
+          <mxGeometry height="80" width="360" x="6400" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-43" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="设置 laser_CycleForwardStartPos=rangemax；\nlaser_IsFrontFootMovingForward=true；返回 true" vertex="1">
+          <mxGeometry height="80" width="360" x="6400" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-44" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="否则：返回 false" vertex="1">
+          <mxGeometry height="50" width="360" x="6400" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-45" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-42" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-46" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.4;exitY=1;" target="-kGmH0JKR3XMYHJRQ5jy-43" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-47" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.6;exitY=1;" target="-kGmH0JKR3XMYHJRQ5jy-44" value="否">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-48" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="开始 WCA_StartCycle" vertex="1">
+          <mxGeometry height="50" width="360" x="6850" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-49" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="调用 ResetCycle；置 sense_CycleStart=true；\n清空 PrePace 与计数" vertex="1">
+          <mxGeometry height="70" width="360" x="6850" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-50" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="LastPaceFrontPos = 当前 sense_PaceFrontPos；\nlaser_IsFrontFootMovingForward=false；日志输出" vertex="1">
+          <mxGeometry height="70" width="360" x="6850" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-51" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="返回" vertex="1">
+          <mxGeometry height="50" width="360" x="6850" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-52" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-49" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-53" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-50" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-54" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-51" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-55" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="开始 WCA_ResetCycle" vertex="1">
+          <mxGeometry height="50" width="360" x="7300" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-56" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="WaitForTime(pCycleStartTick, true, &amp;mseconds)；\n清零 CycleStart/CycleLength" vertex="1">
+          <mxGeometry height="70" width="360" x="7300" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-57" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="返回" vertex="1">
+          <mxGeometry height="50" width="360" x="7300" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-58" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="开始 WCA_EndCycle（步结束→计算步长/时间/速度/因子）" vertex="1">
+          <mxGeometry height="50" width="420" x="7750" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-59" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="从 FrontPos 队列取最近值 frontpos；在最近6点中取“最小值”rangemin，\n仅接受向小值方向且差≤125mm 的点" vertex="1">
+          <mxGeometry height="90" width="420" x="7750" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-60" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="设定 PaceFrontPos=rangemin；更新 sense_PaceFrontPos" vertex="1">
+          <mxGeometry height="70" width="420" x="7750" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-61" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="有效一步？ laser_CycleForwardLength&gt;0 且 sense_CycleTime&gt;0" vertex="1">
+          <mxGeometry height="80" width="420" x="7750" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-62" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="是→ sense_CycleSpeed = sense_CycleLength / sense_CycleTime；\nCycleBeginEndCount++；laser_bCycleSpeedStatus=true；\n调用 WCA_Laser_CalculateFactor_By_CycleFrontPos(frontpos)" vertex="1">
+          <mxGeometry height="100" width="420" x="7750" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-63" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="否→ sense_CycleSpeed=0.0" vertex="1">
+          <mxGeometry height="60" width="420" x="7750" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-64" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="下限约束：sense_CycleSpeed = max(0, sense_CycleSpeed)" vertex="1">
+          <mxGeometry height="60" width="420" x="7750" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-65" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="更新计数/时长/长度：\nStepCycleCount++；StepCycleTime=CycleTime；\nStepCycleLength=CycleLength；LastCycleLength_div=旧 StepCycleLength；\nlaser_IsFrontFootMovingForward=false" vertex="1">
+          <mxGeometry height="80" width="420" x="7750" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-66" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="返回" vertex="1">
+          <mxGeometry height="50" width="420" x="7750" y="750" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-67" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-59" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-68" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-59" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-60" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-69" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-60" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-61" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-70" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.4;exitY=1;" target="-kGmH0JKR3XMYHJRQ5jy-62" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-71" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-61" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.6;exitY=1;" target="-kGmH0JKR3XMYHJRQ5jy-63" value="否">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-72" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-64" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-73" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-63" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-64" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-74" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-65" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-75" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="开始 WCA_Laser_CalculateFactor_By_CycleFrontPos" vertex="1">
+          <mxGeometry height="50" width="360" x="8200" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-76" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="前移距离≤300 且 frontpos&lt;900？\n是→ 若≤50：Forward/BackwardFactor=1.2\n否则线性插值：系数在[1.0,1.2]之间" vertex="1">
+          <mxGeometry height="100" width="360" x="8200" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-77" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="设置 laser_FrontFoot_Forward_Factor / Backward_Factor；\n默认保持为1.0（否则分支）" vertex="1">
+          <mxGeometry height="80" width="360" x="8200" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-78" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="返回" vertex="1">
+          <mxGeometry height="50" width="360" x="8200" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-79" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-75" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="-kGmH0JKR3XMYHJRQ5jy-76" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-80" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.4;exitY=1;" target="-kGmH0JKR3XMYHJRQ5jy-77" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-kGmH0JKR3XMYHJRQ5jy-81" edge="1" parent="1" source="-kGmH0JKR3XMYHJRQ5jy-76" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.6;exitY=1;" target="-kGmH0JKR3XMYHJRQ5jy-78" value="否">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
