@@ -1,0 +1,142 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.7">
+  <diagram name="第 1 页" id="JFQWLMSUTjvgr7Wek4AX">
+    <mxGraphModel dx="-8995" dy="560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-1" parent="1" style="whiteSpace=wrap;html=1;strokeColor=none;fontSize=18;fontStyle=1;fillColor=#ffffff;" value="WCA_WorkStatusProcess — 主流程" vertex="1">
+          <mxGeometry height="40" width="520" x="10850" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-2" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="开始 WCA_WorkStatusProcess" vertex="1">
+          <mxGeometry height="50" width="460" x="10850" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-3" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="bPlayStart？" vertex="1">
+          <mxGeometry height="70" width="460" x="10850" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-4" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="NCUzeCwBjY19V-AwnyMr-3" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-5" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="是→ 若 WorkStatus==IDLE → 设为 STOP_STATUS" vertex="1">
+          <mxGeometry height="70" width="430" x="10680" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-6" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="否→ 若 WorkStatus!=IDLE：\nWaitForTime(reset=true)；\nDeceleLength=5*MaxDeceleLength；WorkStatus=IDLE" vertex="1">
+          <mxGeometry height="90" width="430" x="11220" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-7" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.6;exitY=1;entryX=0.5;entryY=0;" target="NCUzeCwBjY19V-AwnyMr-6" value="否">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-8" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="进入状态机" vertex="1">
+          <mxGeometry height="50" width="460" x="10850" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-9" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="NCUzeCwBjY19V-AwnyMr-8" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-10" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="WorkStatus == STOP_STATUS？" vertex="1">
+          <mxGeometry height="70" width="460" x="10850" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-11" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="NCUzeCwBjY19V-AwnyMr-10" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-12" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="是→ WaitForTime(reset=false) 更新 m_mseconds" vertex="1">
+          <mxGeometry height="60" width="460" x="10850" y="490" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-13" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="isWalkStatus == START_WALK？" vertex="1">
+          <mxGeometry height="70" width="460" x="10850" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-14" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="NCUzeCwBjY19V-AwnyMr-12" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-15" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="NCUzeCwBjY19V-AwnyMr-13" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-16" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="是→ m_mseconds &gt; FreezeMSeconds？" vertex="1">
+          <mxGeometry height="70" width="460" x="10850" y="630" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-17" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="是→ WorkStatus=ACC；WaitForTime(reset=true)；m_mseconds=0；m_ControlSpeed=0" vertex="1">
+          <mxGeometry height="90" width="460" x="10850" y="710" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-18" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="NCUzeCwBjY19V-AwnyMr-16" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-19" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="返回/继续状态链" vertex="1">
+          <mxGeometry height="60" width="460" x="10850" y="810" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-20" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="NCUzeCwBjY19V-AwnyMr-17" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-21" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="WorkStatus == ACC_STATUS？" vertex="1">
+          <mxGeometry height="70" width="460" x="10850" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-22" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="是→ WaitForTime(reset=false)；m_ControlSpeed += 0.01；\n若 ≥ WalkStartSpeed → clamp" vertex="1">
+          <mxGeometry height="70" width="460" x="10850" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-23" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="m_ControlSpeed ≥ 0.9*WalkStartSpeed 且 isWalkStatus==CONT_WALK？" vertex="1">
+          <mxGeometry height="90" width="460" x="10850" y="1060" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-24" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="是→ WorkStatus=AVG；WaitForTime(reset=true)；日志输出" vertex="1">
+          <mxGeometry height="80" width="460" x="10850" y="1150" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-25" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="isWalkStatus == TIMEOUT_STOP_WALK？" vertex="1">
+          <mxGeometry height="80" width="460" x="10850" y="1230" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-26" parent="1" style="whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="是→ WaitForTime(reset=true)；WorkStatus=DEC；\nDeceleLength=1.5*MaxDeceleLength；日志输出" vertex="1">
+          <mxGeometry height="100" width="460" x="10850" y="1310" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-27" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="NCUzeCwBjY19V-AwnyMr-23" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-28" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="NCUzeCwBjY19V-AwnyMr-24" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-29" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="WorkStatus == AVG_STATUS？" vertex="1">
+          <mxGeometry height="70" width="460" x="10850" y="1410" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-30" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="NCUzeCwBjY19V-AwnyMr-26" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-31" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="NCUzeCwBjY19V-AwnyMr-29" value="继续">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-32" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="是→ m_ControlSpeed = sense_WalkSpeed" vertex="1">
+          <mxGeometry height="70" width="460" x="10850" y="1490" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-33" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="m_ControlSpeed &lt; 0.01？是→ m_ControlSpeed=0；WaitForTime(reset=true)；\n若 isWalkStatus==STOP_WALK → WorkStatus=STOP；日志" vertex="1">
+          <mxGeometry height="90" width="460" x="10850" y="1560" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-34" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="isWalkStatus == TIMEOUT_STOP_WALK？是→ WorkStatus=DEC；\nDeceleLength=1.5*MaxDeceleLength；日志" vertex="1">
+          <mxGeometry height="80" width="460" x="10850" y="1650" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-35" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="WorkStatus == DEC_STATUS？" vertex="1">
+          <mxGeometry height="70" width="460" x="10850" y="1740" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-36" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="是→ DecProcess()；若 m_ControlSpeed &lt; 0.01 → 0；\n且 isWalkStatus∈{STOP,TIMEOUT} → WorkStatus=STOP；日志" vertex="1">
+          <mxGeometry height="80" width="460" x="10850" y="1820" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-37" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="WorkStatus == IDLE_STATUS？" vertex="1">
+          <mxGeometry height="70" width="460" x="10850" y="1910" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-38" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="是→ WaitForTime(reset=false)；DecProcess()；\n若 m_ControlSpeed &lt; 0.01 → 0；WaitForTime(reset=true)" vertex="1">
+          <mxGeometry height="90" width="460" x="10850" y="1990" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-39" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="NCUzeCwBjY19V-AwnyMr-25" value="继续">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-40" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="NCUzeCwBjY19V-AwnyMr-32" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-41" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-34" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;exitX=0.5;exitY=1;" target="NCUzeCwBjY19V-AwnyMr-35" value="继续">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-42" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-35" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="NCUzeCwBjY19V-AwnyMr-36" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-43" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="NCUzeCwBjY19V-AwnyMr-37" value="继续/下一状态">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NCUzeCwBjY19V-AwnyMr-44" edge="1" parent="1" source="NCUzeCwBjY19V-AwnyMr-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="NCUzeCwBjY19V-AwnyMr-38" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
