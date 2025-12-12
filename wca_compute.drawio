@@ -1,0 +1,112 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36" version="29.2.7">
+  <diagram name="第 1 页" id="owvCjvJEAJUZzLukoGbS">
+    <mxGraphModel dx="929" dy="560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="e356qZvp-Slwx0E2waLJ-1" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="开始 WCA_Compute" vertex="1">
+          <mxGeometry height="50" width="280" x="500" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-2" parent="1" style="whiteSpace=wrap;html=1;shape=rhombus;fillColor=#fff2cc;strokeColor=#d6b656;" value="未初始化？ isInitiated == false" vertex="1">
+          <mxGeometry height="70" width="280" x="500" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-3" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="初始化 WCA_Init(...)\n固定/可变参数、位置、状态、PID" vertex="1">
+          <mxGeometry height="70" width="280" x="500" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-4" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="解析激光数据 WCA_Laser_ParseData\nFoot/Wasit 数据→SensorPos" vertex="1">
+          <mxGeometry height="70" width="280" x="500" y="400" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-5" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="计算步速 WCA_Laser_RunGetWalkSpeed" vertex="1">
+          <mxGeometry height="60" width="280" x="500" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-6" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="记录电机速度 FAf_AddValue(SensorPos.pFAf_MotorSpeed,CurMotorSpeed)" vertex="1">
+          <mxGeometry height="60" width="280" x="500" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-7" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="计算行走状态 WCA_SenseGetWalkStatus" vertex="1">
+          <mxGeometry height="60" width="280" x="500" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-8" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="检测一步周期 WCA_Laser_GetCycleTimeByPos" vertex="1">
+          <mxGeometry height="60" width="280" x="500" y="740" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-9" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="滤波速度 WCA_Laser_FilterSpeed → sense_WalkSpeed" vertex="1">
+          <mxGeometry height="60" width="280" x="500" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-10" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="更新 WSProcess 状态\nm_isWalkStatus, StartStepCount" vertex="1">
+          <mxGeometry height="60" width="280" x="500" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-11" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="工作状态处理 WCA_WorkStatusProcess\n→ m_ControlSpeed" vertex="1">
+          <mxGeometry height="60" width="280" x="500" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-12" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="更新上次电机速度\nsense_LastMotorSpeed = CurMotorSpeed" vertex="1">
+          <mxGeometry height="60" width="280" x="500" y="1060" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-13" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="写日志 Write_WCALogofVaryingParas" vertex="1">
+          <mxGeometry height="60" width="280" x="500" y="1140" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-14" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="更新结果 TargetWalkSpeed = m_ControlSpeed" vertex="1">
+          <mxGeometry height="60" width="280" x="500" y="1220" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-15" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="夹紧速度到 [0, WalkMaxSpeed]" vertex="1">
+          <mxGeometry height="60" width="280" x="500" y="1300" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-16" parent="1" style="whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="更新步态/位置\nPaceDistance/Time/Count, FootPos, WaistPos ..." vertex="1">
+          <mxGeometry height="70" width="280" x="500" y="1380" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-17" parent="1" style="whiteSpace=wrap;html=1;shape=terminator;fillColor=#d5e8d4;strokeColor=#82b366;" value="返回 0" vertex="1">
+          <mxGeometry height="50" width="280" x="500" y="1480" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-18" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-19" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-3" value="是">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-20" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-4" value="否">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-21" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-22" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-5" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-23" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-6" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-24" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-7" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-25" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-8" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-26" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-9" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-27" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-10" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-28" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-11" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-29" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-12" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-30" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-13" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-31" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-14" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-32" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-15" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-33" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-16" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e356qZvp-Slwx0E2waLJ-34" edge="1" parent="1" source="e356qZvp-Slwx0E2waLJ-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" target="e356qZvp-Slwx0E2waLJ-17" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
